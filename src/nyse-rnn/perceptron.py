@@ -1,5 +1,7 @@
 from keras.models import Sequential
-from keras.layers.core import TimeDistributedMerge, TimeDistributedDense, Dense, Dropout, Activation
+from keras.layers import TimeDistributed
+#from keras.layers.core import TimeDistributedMerge, TimeDistributedDense, Dense, Dropout, Activation
+from keras.layers.core import Dense, Dropout, Activation
 from nyse import *
 from nn import *
 from keras.optimizers import SGD
@@ -18,10 +20,10 @@ class MLP:
     def __prepare_model(self):
         print('Build model...')
         model = Sequential()
-        model.add(TimeDistributedDense(output_dim=self.hidden_cnt,
-                                       input_dim=self.input_dim,
-                                       input_length=self.input_length,
-                                       activation='sigmoid'))
+        model.add(TimeDistributed(Dense(output_dim=self.hidden_cnt,
+                                        input_dim=self.input_dim,
+                                        input_length=self.input_length,
+                                        activation='sigmoid')))
         model.add(TimeDistributedMerge(mode='ave'))
         model.add(Dropout(0.5))
         model.add(Dense(self.hidden_cnt, activation='tanh'))

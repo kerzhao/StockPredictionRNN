@@ -20,8 +20,7 @@ class NeuralNetwork:
                 data.y,
                 validation_split=self.validation_split,
                 batch_size=self.batch_size,
-                nb_epoch=self.nb_epoch,
-                show_accuracy=self.show_accuracy)
+                nb_epoch=self.nb_epoch)
         return self.test(data)
 
     def test(self, data):

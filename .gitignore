@@ -150,4 +150,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+src/nyse-rnn/data/
+src/nyse-rnn/symbols/
 

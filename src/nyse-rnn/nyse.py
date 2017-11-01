@@ -53,7 +53,7 @@ class NyseOpenBook(object):
 
     def save_to_db(self, db):
         i = 0;
-        for list in self.symbols_dict.itervalues():
+        for list in self.symbols_dict.values():
             for record in list:
                 item = {
                     'symbol': record.Symbol,
@@ -79,7 +79,7 @@ class NyseOpenBook(object):
         gap += '|'
         print(gap)
 
-        for list in self.symbols_dict.itervalues():
+        for list in self.symbols_dict.values():
             for record in list:
                 print(record)
 
@@ -348,7 +348,7 @@ def get_test_data(window_size):
     book.pickle_from_file('AIG')
     
     order_book = NyseOrderBook("AIG")
-    for list in book.symbols_dict.itervalues():
+    for list in book.symbols_dict.values():
         for order in list:
             order_book.process_order(order)
             
@@ -358,7 +358,7 @@ def get_test_data(window_size):
 def main():
     book = NyseOpenBook("test")
 #     # filename = 'bigFile.binary'
-    filename = 'openbookultraAA_N20130403_1_of_1'
+    filename = 'data/openbookultraAA_N20130403_1_of_1'
 #     # record_filter = (lambda x: ('NOM' in x.Symbol) & ((x.Side == 'B') | (x.Side == 'S')))
 #     # record_filter = (lambda x: 'AZN' in x.Symbol)
     record_filter = (lambda x: True)
@@ -368,7 +368,7 @@ def main():
 # #     db_client = pymongo.MongoClient('localhost', 27017)
 # #     book.save_to_db(db_client['nyse'])
 #
-    for list in book.symbols_dict.itervalues():
+    for list in book.symbols_dict.values():
         book.pickle_to_file(list[0].Symbol)
     
     book.symbols_dict = {}
@@ -377,7 +377,7 @@ def main():
     # book.read_from_db(db_client['nyse'], {'symbol': 'AZN'})
     # book.print_records()
     order_book = NyseOrderBook("AIG")
-    for list in book.symbols_dict.itervalues():
+    for list in book.symbols_dict.values():
         for order in list:
             order_book.process_order(order)
     book.print_records()
